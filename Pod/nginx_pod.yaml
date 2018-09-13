@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-nginx
+  labels:
+    name: myapp-nginx
+spec:
+  hostNetwork: true
+  hostPID: true
+  hostname: test-nginx
+  containers:
+  - name: my-nginx
+    image: nginx
+    ports:
+      - containerPort: 80

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cirros
+  labels:
+    name: cirros
+spec:
+  hostNetwork: true
+  containers:
+  - name: myapp-cirros
+    image: cirros
