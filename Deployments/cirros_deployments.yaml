@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mycirros
+spec:
+  selector:
+    matchLabels:
+      app: mycirros
+  template:
+    metadata:
+      labels:
+        app: mycirros
+    spec:
+      containers:
+      - name: mycirros
+        image: cirros
