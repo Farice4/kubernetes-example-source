@@ -1,0 +1,15 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  # name must match the spec fields below, and be in the form: <plural>.<group>
+  name: network.kubernetes.com
+spec:
+  group: kubernetes.com
+  version: v1
+  scope: Namespaced
+  names:
+    plural: network
+    singular: network
+    kind: Network
+    shortNames:
+    - net

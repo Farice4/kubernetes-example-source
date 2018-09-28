@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multus-multi-net-pod
+  annotations:
+    networks: '[
+        { "name": "flannel-conf" },
+        { "name": "sriov-conf" },
+        { "name": "sriov-vlanid-l2enable-conf"}
+      ]'
+spec:
+  containers:
+  - name: multus-multi-net-pod
+    image: cirros

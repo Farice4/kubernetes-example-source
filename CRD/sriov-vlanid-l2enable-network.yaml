@@ -1,0 +1,13 @@
+apiVersion: "kubernetes.com/v1"
+kind: Network
+metadata:
+  name: sriov-vlanid-l2enable-conf
+plugin: sriov
+args: '[
+          {
+            "if0": "enp2s0",
+            "vlan": 210,
+            "if0name": "north",
+            "l2enable": true
+          }
+]'
