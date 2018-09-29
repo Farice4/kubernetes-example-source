@@ -1,0 +1,9 @@
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: my-httpd
+subsets:
+  - addresses:
+      - ip: 192.168.88.66
+    ports:
+      - port: 80
