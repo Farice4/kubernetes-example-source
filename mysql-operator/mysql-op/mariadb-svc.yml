@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    v1alpha1.mysql.oracle.com/cluster: mariadb-server
+  name: mariadb
+  namespace: database
+spec:
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    v1alpha1.mysql.oracle.com/cluster: mariadb-server
+    v1alpha1.mysql.oracle.com/role: primary
+  type: ClusterIP

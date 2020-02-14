@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: face-class-gpu
+spec:
+  containers:
+  - name: face-class-gpu
+    image: face-class-gpu:1.1.0
+    imagePullPolicy: IfNotPresent
+    command: ["sleep", "infinity"]
+    resources:
+      limits:
+        nvidia.com/gpu: "0"
+    volumeMounts:
+      - mountPath: "/root/mtcnn_dataset"
+        name: face-pvc
+  volumes:
+    - name: face-pvc
+      persistentVolumeClaim:
+       claimName: face-class
+  nodeSelector:
+    kubernetes.io/hostname: k8s-node2

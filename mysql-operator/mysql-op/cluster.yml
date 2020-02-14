@@ -1,0 +1,22 @@
+apiVersion: mysql.oracle.com/v1alpha1
+kind: Cluster
+metadata:
+  namespace: database
+  name: mariadb-server
+spec:
+  members: 3
+  multiMaster: true
+  rootPasswordSecret:
+    name: mysql-root-password
+  config:
+    name: mycnf-operator
+  volumeClaimTemplate:
+    metadata:
+      name: data
+    spec:
+      storageClassName: rook-ceph-block
+      accessModes:
+        - ReadWriteMany
+      resources:
+        requests:
+          storage: 1Gi

@@ -1,0 +1,52 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: zookeeper
+spec:
+  selector:
+    matchLabels:
+      app: zookeeper
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+    spec:
+      containers:
+      - env:
+        - name: ZOOKEEPER_SERVERS
+          value: "1"
+        image: "komljen/zookeeper:3.4.10"
+        imagePullPolicy: IfNotPresent
+        name: zookeeper
+        ports:
+        - containerPort: 2181
+          name: client
+        - containerPort: 2888
+          name: server
+        - containerPort: 3888
+          name: leader-election
+        readinessProbe:
+          exec:
+            command:
+            - /opt/zookeeper/bin/zkOK.sh
+          initialDelaySeconds: 10
+          timeoutSeconds: 2
+          periodSeconds: 5
+        livenessProbe:
+          exec:
+            command:
+            - /opt/zookeeper/bin/zkOK.sh
+          initialDelaySeconds: 120
+          timeoutSeconds: 2
+          periodSeconds: 5
+        volumeMounts:
+        - mountPath: /data
+          name: zookeeper-data
+      restartPolicy: Always
+      nodeSelector:
+        disktype: ssd
+      volumes:
+      - name: zookeeper-data
+        persistentVolumeClaim:
+          claimName: task-pv-claim
